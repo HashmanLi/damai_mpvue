@@ -1,0 +1,71 @@
+@mixin ellipsis-lines($lines: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+}
+
+// linear-gradient实现
+// 安卓4.3- 不支持background-size的百分比
+$colorBorder: #ccc;
+@mixin retina-one-px-bg($direction: top, $color: $colorBorder) {
+    background-repeat: no-repeat;
+    @if $direction == top {
+        background-image: linear-gradient(
+            to bottom,
+            $color 50%,
+            transparent 50%
+        );
+        background-size: 100% 1px;
+    }
+    @if $direction == bottom {
+        background-image: linear-gradient(to top, $color 50%, transparent 50%);
+        background-size: 100% 1px;
+        background-position: left bottom;
+    }
+    @if $direction == left {
+        background-image: linear-gradient(
+            to right,
+            $color 50%,
+            transparent 50%
+        );
+        background-size: 1px 100%;
+    }
+    @if $direction == right {
+        background-image: linear-gradient(to left, $color 50%, transparent 50%);
+        background-size: 1px 100%;
+        background-position: right top;
+    }
+    @if $direction == v {
+        // 左右两个边框
+        background-image: linear-gradient(to right, $color 50%, transparent 50%),
+            linear-gradient(to left, $color 50%, transparent 50%);
+        background-size: 1px 100%;
+        background-position: left top, right top;
+    }
+    @if $direction == h {
+        // 上下两个边框
+        background-image: linear-gradient(
+                to bottom,
+                $color 50%,
+                transparent 50%
+            ),
+            linear-gradient(to top, $color 50%, transparent 50%);
+        background-size: 100% 1px;
+        background-position: left top, left bottom;
+    }
+    @if $direction == all {
+        // 上下左右四个边框
+        background-image: linear-gradient(
+                to bottom,
+                $color 50%,
+                transparent 50%
+            ),
+            linear-gradient(to top, $color 50%, transparent 50%),
+            linear-gradient(to right, $color 50%, transparent 50%),
+            linear-gradient(to left, $color 50%, transparent 50%);
+        background-size: 100% 1px, 100% 1px, 1px 100%, 1px 100%;
+        background-position: left top, left bottom, left top, right top;
+    }
+}
