@@ -10,6 +10,7 @@ page {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
+    line-height: 14px;
 }
 view {
     box-sizing: border-box;
